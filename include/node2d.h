@@ -101,14 +101,19 @@ class Node2D {
 
  private:
   /// the x position
+  // x坐标
   int x;
   /// the y position
+  // y坐标
   int y;
   /// the cost-so-far
+  // 到目前为止的成本
   float g;
   /// the cost-to-go
+  // 离目标的估计成本
   float h;
   /// the index of the node in the 2D array
+  // 在二维数组中的索引
   int idx;
   /// the open value
   bool o;

@@ -11,8 +11,11 @@ const int Node3D::dir = 3;
 //const float Node3D::dt[] = { 0,         0.10472,   -0.10472};
 
 // R = 6, 6.75 DEG
+// 预先定义的运动原语
 const float Node3D::dy[] = { 0,        -0.0415893,  0.0415893};
+// dx设置每一次走的步长，
 const float Node3D::dx[] = { 0.7068582,   0.705224,   0.705224};
+// 下面的是，方向角转动6.75度时，对应的弧度变化，0直线，1右转，2左转
 const float Node3D::dt[] = { 0,         0.1178097,   -0.1178097};
 
 // R = 3, 6.75 DEG
@@ -45,7 +48,8 @@ bool Node3D::isInRange(const Node3D& goal) const {
 //###################################################
 //                                   CREATE SUCCESSOR
 //###################################################
-Node3D* Node3D::createSuccessor(const int i) {
+Node3D* Node3D::createSuccessor(const int i){
+  //计算当前节点的后继节点，dx、dy、dt
   float xSucc;
   float ySucc;
   float tSucc;

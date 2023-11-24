@@ -53,6 +53,7 @@ void Planner::setMap(const nav_msgs::OccupancyGrid::Ptr map) {
   grid = map;
   //update the configuration space with the current map
   //使用当前地图更新配置空间
+  // 更改planner类中私有变量configurationSpace类中的grid变量
   configurationSpace.updateGrid(map);
   //create array for Voronoi diagram
   // 为Voronoi图创建数组
@@ -231,6 +232,19 @@ void Planner::plan() {
     smoothedPath.clear();
     // FIND THE PATH
     // 找到路径，开始规划
+    /**
+     * @brief hybridAStar
+     * @param nStart 起始节点
+     * @param nGoal 目标节点
+     * @param nodes3D 三维数组，考虑了航向，每个节点都有一个cost，cost越小，越优先搜索
+     * @param nodes2D 二维数组，不考虑方向（除去depth）
+     * @param width 地图宽度
+     * @param height 地图高度
+     * @param configurationSpace 碰撞检测
+     * @param dubinsLookup dubins曲线查找表
+     * @param visualization 可视化发布搜索结果至rviz
+     * @return 返回最优路径的三维数组节点
+     */
     Node3D *nSolution = Algorithm::hybridAStar(nStart,
                                                nGoal,
                                                nodes3D,
